@@ -1,1 +1,7 @@
 venv
+.cache
+*.ini
+build
+dist
+kivy_ios
+tests
