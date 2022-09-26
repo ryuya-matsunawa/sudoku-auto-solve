@@ -5,3 +5,4 @@ build
 dist
 kivy_ios
 tests
+*/settings.json
