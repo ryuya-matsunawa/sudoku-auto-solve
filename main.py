@@ -5,13 +5,13 @@ from kivy.uix.gridlayout import GridLayout
 from kivy.lang import Builder
 Builder.load_file('./SampleGrid.kv')
 
-class MyGrid1(GridLayout):
+class MainGrid(GridLayout):
     pass
 
-class SampleGridLayoutApp(App):
+class SudokuApp(App):
     def build(self):
-        root = MyGrid1()
+        root = MainGrid()
         return root
 
 if __name__ == '__main__':
-    SampleGridLayoutApp().run()
+    SudokuApp().run()
