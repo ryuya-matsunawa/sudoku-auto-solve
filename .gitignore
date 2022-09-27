@@ -6,3 +6,4 @@ dist
 kivy_ios
 tests
 */settings.json
+.DS_Store
