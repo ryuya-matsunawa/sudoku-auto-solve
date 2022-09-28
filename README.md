@@ -1,1 +1,1 @@
-# Sudoku-auto-resolve
+# Sudoku-auto-solve
