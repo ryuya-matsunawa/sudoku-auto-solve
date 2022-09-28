@@ -1,8 +1,10 @@
+import copy
 from itertools import product
 
 def main(problem):
-    if solve(problem, 0, 0):
-        return problem
+    answer = copy.deepcopy(problem)
+    if solve(answer, 0, 0):
+        return answer
 
 def solve(problem, row, col):
     if row == 9:
