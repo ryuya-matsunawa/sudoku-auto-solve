@@ -43,9 +43,9 @@ class SudokuApp(App):
         for (i, j) in product(range(3), repeat=2):
             cell = self.cells[(i, j)].text
             problem[i][j] = int(cell) if cell != "*" else 0
-        answer = solve.main(problem)
+        answers = solve.main(problem)
         for (i, j) in product(range(9), repeat=2):
-            self.cells[(i, j)].text = Cell.DIC[answer[i][j]]
+            self.cells[(i, j)].text = Cell.DIC[answers[0][i][j]]
         pass
 
 if __name__ == '__main__':

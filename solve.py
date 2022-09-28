@@ -2,9 +2,11 @@ import copy
 from itertools import product
 
 def main(problem):
+    answers = []
     answer = copy.deepcopy(problem)
     if solve(answer, 0, 0):
-        return answer
+        answers.append(answer)
+        return answers
 
 def solve(problem, row, col):
     if row == 9:
