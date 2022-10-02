@@ -1,7 +1,6 @@
 #:set padding 20
 
 <MainGrid>:
-    id: main_grid
     rows: 3
     cols: 3
     spacing: 15
@@ -13,31 +12,30 @@
 <Cell>:
     size_hint_x: 1
     size_hint_y: 1
-    font_size: '30dp'
+    font_size: 30
 
 FloatLayout:
     BoxLayout:
-        pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+        pos_hint: {'center_x': .5, 'center_y': .5}
         size_hint: (None, None)
         center: root.center
         size: [min(root.width, root.height) - 2 * padding] * 2
         orientation: 'vertical'
         BoxLayout:
-            id:blayout
             orientation: 'horizontal'
-            size_hint_y: 0.5
+            size_hint_y: .5
             Label:
                 id:message
-                size_hint_x: 0.5
+                size_hint_x: .5
                 text:'SudokuSolver'
             Button:
                 id:reset
-                size_hint_x: 0.25
+                size_hint_x: .25
                 text:'Reset'
                 on_press:app.reset()
             Button:
                 id:solve
-                size_hint_x: 0.25
+                size_hint_x: .25
                 text:'Solve'
                 on_press:app.solve()
         MainGrid:
@@ -47,8 +45,7 @@ FloatLayout:
             size: [min(root.width, root.height) - 2 * padding] * 2
         SubGrid:
             id: number_grid
-            padding: 10
-            size_hint_x: 0.25
-            size_hint_y: 3
+            size_hint_x: .25
+            size_hint_y: 2.5
             center: root.center
-            size: [min(root.width, root.height) - 100 * padding] * 2
+            padding: [0, 10, 0, 0]
