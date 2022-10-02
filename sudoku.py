@@ -64,5 +64,9 @@ class SudokuApp(App):
             self.cells[(i, j)].text = Cell.DIC[answers[0][i][j]]
         pass
 
+    def reset(self):
+        for (i, j) in product(range(9), repeat=2):
+            self.cells[(i, j)].text = Cell.DIC[0]
+
 if __name__ == '__main__':
     SudokuApp().run()
