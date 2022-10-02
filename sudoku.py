@@ -24,12 +24,6 @@ class Cell(Button):
         super(Cell, self).__init__(**kwargs)
         self.text = Cell.DIC[0]
 
-    # def on_press(self):
-    #     self.selected_cell = self.ce
-    #     with self.canvas.before:
-    #         Color(1, 1, 0, 2) # yellow; colors range from 0-1 instead of 0-255
-    #         Rectangle(pos=self.pos, size=self.size) # set a rectangle as the background
-
 class SudokuApp(App):
     def __init__(self, **kwargs):
         super(SudokuApp, self).__init__(**kwargs)
@@ -77,6 +71,7 @@ class SudokuApp(App):
         pass
 
     def reset(self):
+        solve.answers = []
         for (i, j) in product(range(9), repeat=2):
             self.cells[(i, j)].text = Cell.DIC[0]
 
