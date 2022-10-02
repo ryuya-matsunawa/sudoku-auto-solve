@@ -24,11 +24,11 @@ class Cell(Button):
         super(Cell, self).__init__(**kwargs)
         self.text = Cell.DIC[0]
 
-    def on_press(self):
-        self.selected_cell = self.ce
-        with self.canvas.before:
-            Color(1, 1, 0, 2) # yellow; colors range from 0-1 instead of 0-255
-            Rectangle(pos=self.pos, size=self.size) # set a rectangle as the background
+    # def on_press(self):
+    #     self.selected_cell = self.ce
+    #     with self.canvas.before:
+    #         Color(1, 1, 0, 2) # yellow; colors range from 0-1 instead of 0-255
+    #         Rectangle(pos=self.pos, size=self.size) # set a rectangle as the background
 
 class SudokuApp(App):
     def __init__(self, **kwargs):
@@ -41,18 +41,30 @@ class SudokuApp(App):
             sub_grid = SubGrid()
             for (i, j) in product(range(3), repeat=2):
                 cell = Cell()
+                self.selected_cell = None
+                cell.fbind("on_press", self.select_cell, pos=(k*3+i, l*3+j))
                 self.cells[(3*k+i, 3*l+j)] = cell
                 sub_grid.add_widget(cell)
             main_grid.add_widget(sub_grid)
         number_grid = self.root.ids.number_grid
-        for i in range(1, 10):
+        for index in range(1, 10):
             cell = Cell()
-            cell.text = Cell.DIC[i]
+            cell.fbind("on_press", self.change_cell)
+            cell.text = Cell.DIC[index]
             number_grid.add_widget(cell)
         # return main_grid
 
-    def change_cell(self, row, col, num):
-        self.cells[(row, col)].text = Cell.DIC[num]
+    def select_cell(self, cell, pos):
+        if self.selected_cell is not None:
+            self.selected_cell.canvas.before.clear()
+        self.selected_cell = cell
+        self.selected_cell_pos = pos
+        with cell.canvas.before:
+            Color(1, 1, 0, 2)
+            Rectangle(pos=cell.pos, size=cell.size)
+
+    def change_cell(self, cell):
+        self.cells[self.selected_cell_pos].text = cell.text
 
     def solve(self):
         problem = [[0] * 9 for _ in range(9)]
