@@ -2,6 +2,7 @@
 from itertools import product
 from select import select
 from kivy.uix.button import Button
+from kivy.graphics import Color, Rectangle
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
 from kivy.uix.behaviors import FocusBehavior
@@ -23,6 +24,12 @@ class Cell(Button):
         super(Cell, self).__init__(**kwargs)
         self.text = Cell.DIC[0]
 
+    def on_press(self):
+        self.selected_cell = self.ce
+        with self.canvas.before:
+            Color(1, 1, 0, 2) # yellow; colors range from 0-1 instead of 0-255
+            Rectangle(pos=self.pos, size=self.size) # set a rectangle as the background
+
 class SudokuApp(App):
     def __init__(self, **kwargs):
         super(SudokuApp, self).__init__(**kwargs)
@@ -37,6 +44,15 @@ class SudokuApp(App):
                 self.cells[(3*k+i, 3*l+j)] = cell
                 sub_grid.add_widget(cell)
             main_grid.add_widget(sub_grid)
+        number_grid = self.root.ids.number_grid
+        for i in range(1, 10):
+            cell = Cell()
+            cell.text = Cell.DIC[i]
+            number_grid.add_widget(cell)
+        # return main_grid
+
+    def change_cell(self, row, col, num):
+        self.cells[(row, col)].text = Cell.DIC[num]
 
     def solve(self):
         problem = [[0] * 9 for _ in range(9)]
