@@ -1,4 +1,3 @@
-import copy
 from itertools import product
 
 answers = []
