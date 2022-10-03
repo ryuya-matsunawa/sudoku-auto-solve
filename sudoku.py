@@ -45,7 +45,7 @@ class SudokuApp(App):
             self.selected_cell.background_color = (1, 1, 1, 1)
         self.selected_cell = instance
         self.selected_cell_pos = pos
-        self.selected_cell.background_color = (1, 1, 0, 1)
+        self.selected_cell.background_color = (0, 1, 0, 1)
 
     def set_number(self, instance):
         if self.selected_cell:
