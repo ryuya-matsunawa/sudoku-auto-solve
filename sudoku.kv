@@ -14,38 +14,33 @@
     size_hint_y: 1
     font_size: 30
 
-FloatLayout:
+BoxLayout:
+    padding: 10
+    spacing: 10
+    orientation: 'vertical'
     BoxLayout:
-        pos_hint: {'center_x': .5, 'center_y': .5}
-        size_hint: (None, None)
-        center: root.center
-        size: [min(root.width, root.height) - 2 * padding] * 2
-        orientation: 'vertical'
-        BoxLayout:
-            orientation: 'horizontal'
-            size_hint_y: .5
-            Label:
-                id:message
-                size_hint_x: .5
-                text:'SudokuSolver'
-            Button:
-                id:reset
-                size_hint_x: .25
-                text:'Reset'
-                on_press:app.reset()
-            Button:
-                id:solve
-                size_hint_x: .25
-                text:'Solve'
-                on_press:app.solve()
+        size_hint_y: 3
+        padding: 10
         MainGrid:
             id: main_grid
-            size_hint_y: 9
             center: root.center
             size: [min(root.width, root.height) - 2 * padding] * 2
+    BoxLayout:
+        size_hint_y: 1
+        padding: 10
         SubGrid:
             id: number_grid
-            size_hint_x: .25
-            size_hint_y: 2.5
             center: root.center
-            padding: [0, 10, 0, 0]
+            size_hint_x: 1
+            size: [min(root.width, root.height) - 2 * padding] * 2
+            padding: [0, 0, 10, 0]
+        Button:
+            id:reset
+            size_hint_x: .5
+            text:'Reset'
+            on_press:app.reset()
+        Button:
+            id:solve
+            size_hint_x: .5
+            text:'Solve'
+            on_press:app.solve()
