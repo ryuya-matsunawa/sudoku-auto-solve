@@ -38,7 +38,6 @@ class SudokuApp(App):
             cell.fbind("on_press", self.set_number)
             cell.text = Cell.DIC[index]
             number_grid.add_widget(cell)
-        # return main_grid
 
     def select_cell(self, instance, pos):
         if self.selected_cell is not None:
