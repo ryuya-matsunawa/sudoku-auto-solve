@@ -1,0 +1,97 @@
+# #:set padding 20
+
+# <MainGrid>:
+#     rows: 3
+#     cols: 3
+#     spacing: 15
+
+# <SubGrid>:
+#     rows: 3
+#     cols: 3
+
+# <Cell>:
+#     size_hint_x: 1
+#     size_hint_y: 1
+#     font_size: 30
+
+# BoxLayout:
+#     padding: 10
+#     spacing: 10
+#     orientation: 'vertical'
+#     BoxLayout:
+#         size_hint_y: 3
+#         padding: 10
+#         MainGrid:
+#             id: main_grid
+#             center: root.center
+#             size: [min(root.width, root.height) - 2 * padding] * 2
+#     BoxLayout:
+#         size_hint_y: 1
+#         padding: 10
+#         SubGrid:
+#             id: number_grid
+#             center: root.center
+#             size_hint_x: 1
+#             size: [min(root.width, root.height) - 2 * padding] * 2
+#             padding: [0, 0, 10, 0]
+#         Button:
+#             id:reset
+#             size_hint_x: .5
+#             text:'Reset'
+#             on_press:app.reset()
+#         Button:
+#             id:solve
+#             size_hint_x: .5
+#             text:'Solve'
+#             on_press:app.solve()
+
+
+BoxLayout:
+	padding: '10dp'
+	spacing: '10dp'
+	orientation: 'vertical' if self.height > self.width else 'horizontal'
+	canvas:
+		Color:
+			rgb: 0xfa / 255., 0xf8 / 255., 0xef / 255.
+		Rectangle:
+			pos: self.pos
+			size: self.size
+
+	AnchorLayout:
+		id: anchor
+
+		Game2048:
+			id: game
+			size_hint: None, None
+			size: [min(anchor.width, anchor.height)] * 2
+			on_size: self.reposition()
+			on_pos: self.reposition()
+
+<Game2048>:
+	AnchorLayout:
+		id: end
+		pos: root.pos
+		size: root.size
+		opacity: 0
+
+		canvas:
+			Color:
+				rgba: 0xfa / 255., 0xf8 / 255., 0xef / 255., self.opacity - 0.2
+			BorderImage:
+				pos: self.pos
+				size: self.size
+				source: 'data/round.png'
+
+		BoxLayout:
+
+			orientation: 'vertical'
+			padding: '10dp'
+			spacing: '20dp'
+
+			Label:
+				id: end_label
+				font_size: min(self.height, self.width) / 3.
+				color: 0x77 / 255., 0x6e / 255., 0x65 / 255., 1.
+				bold: True
+				text: 'Game\nover!'
+				halign: 'center'
