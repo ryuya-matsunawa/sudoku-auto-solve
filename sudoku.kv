@@ -14,6 +14,23 @@
     size_hint_y: 1
     font_size: 30
 
+<CameraClick>:
+    orientation: 'vertical'
+    Camera:
+        id: camera
+        resolution: (640, 480)
+        play: False
+    ToggleButton:
+        text: 'Play'
+        on_press: camera.play = not camera.play
+        size_hint_y: None
+        height: '48dp'
+    Button:
+        text: 'Capture'
+        size_hint_y: None
+        height: '48dp'
+        on_press: root.capture()
+
 BoxLayout:
     padding: '15dp'
 	spacing: '15dp'
@@ -49,3 +66,9 @@ BoxLayout:
             size_hint_x: .5
             text:'Solve'
             on_press:app.solve()
+    AnchorLayout:
+        id: anchor3
+        CameraClick:
+            id: camera
+            size_hint: None, None
+            size: [min(anchor3.width, anchor3.height)] * 2
