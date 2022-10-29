@@ -4,6 +4,8 @@ from select import select
 from kivy.uix.button import Button
 from kivy.app import App
 from kivy.uix.gridlayout import GridLayout
+from kivy.uix.boxlayout import BoxLayout
+import time
 import solve
 
 class MainGrid(GridLayout):
@@ -18,6 +20,17 @@ class Cell(Button):
     def __init__(self, **kwargs):
         super(Cell, self).__init__(**kwargs)
         self.text = Cell.DIC[0]
+
+class CameraClick(BoxLayout):
+    def capture(self):
+        '''
+        Function to capture the images and give them the names
+        according to their captured time and date.
+        '''
+        camera = self.ids['camera']
+        timestr = time.strftime("%Y%m%d_%H%M%S")
+        camera.export_to_png("IMG_{}.png".format(timestr))
+        print("Captured")
 
 class SudokuApp(App):
     def build(self):
@@ -63,6 +76,9 @@ class SudokuApp(App):
         solve.answers = []
         for (i, j) in product(range(9), repeat=2):
             self.cells[(i, j)].text = Cell.DIC[0]
+
+    def camera(self):
+        pass
 
 if __name__ == '__main__':
     SudokuApp().run()
